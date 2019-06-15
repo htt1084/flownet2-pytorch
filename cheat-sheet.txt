@@ -8,8 +8,8 @@ python main.py --inference --model FlowNet2 --save_flow --save ./result/ --infer
 
 # Training
 python main.py --batch_size 8 --model FlowNet2 --loss=L1Loss --optimizer=Adam --optimizer_lr=1e-4 \
---training_dataset MpiSintelFinal --training_dataset_root ./MPI-Sintel/training/final  \
---validation_dataset MpiSintelClean --validation_dataset_root ./MPI-Sintel/training/final
+--training_dataset MpiSintelFinal --training_dataset_root /mnt/flownet2-pytorch-backup/MPI-Sintel/training/final  \
+--validation_dataset MpiSintelClean --validation_dataset_root mnt/flownet2-pytorch/MPI-Sintel/training/final
 
 
 
