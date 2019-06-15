@@ -1,0 +1,29 @@
+# Rename
+cp models.py FlowNet2.py
+
+# cp demo.py from https://github.com/vt-vl-lab/pytorch_flownet2/blob/master/demo.py
+# demo.py works!
+# flow_pair.py works!
+
+# cp flow_to_image.py/flowlib.py from https://github.com/vt-vl-lab/pytorch_flownet2/blob/master/FlowNet2_src/flowlib.py
+
+# To run demo.py (import png)
+ pip install pypng
+
+# 06-12-2019
+Can train FlowNet2, but FlowNet2S has issue, saved to slack as FlowNet2S_training_issue.png
+Issue: 
+TypeError: rsub() received an invalid combination of arguments - got (Tensor, tuple), but expected one of:
+* (Tensor input, Tensor other, Number alpha)
+
+
+# Train and test on MPI-SintelClean
+Training Epoch 100 L1: 2.767, EPE: 4.527, lr: 1.0e-04, load: 3.1e-05: 100%|█████████| 130/130.0 [00:41<00:00,  3.21it/s]
+
+# Train on MPI-SintelFinal and test on MPI-SintelClean
+Training Epoch 200 L1: 10.412, EPE: 16.045
+
+# 06-13-2019
+- batch size 8 => 10/16 GB GPU memory, GPU-Util ~ 90%
+- batch size 16 => 16/16 GB GPU memory, GPU-Util 97% (stable training still)
+

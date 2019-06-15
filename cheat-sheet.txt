@@ -1,0 +1,21 @@
+python main.py --inference --model FlowNet2 --save_flow --inference_dataset MpiSintelClean --inference_dataset_root ./MPI-Sintel/training --resume ./FlowNet2_checkpoint.pth.tar
+
+python main.py --inference --model FlowNet2 --save_flow --save ./result --inference_dataset MpiSintelClean \
+--inference_dataset_root ./MPI-Sintel/training --resume ./FlowNet2_checkpoint.pth.tar
+
+
+python main.py --inference --model FlowNet2 --save_flow --save ./result/ --inference_dataset clean/tiger --inference_dataset_root ./MPI-Sintel/test --resume ./FlowNet2_checkpoint.pth.tar
+
+# Training
+python main.py --batch_size 8 --model FlowNet2 --loss=L1Loss --optimizer=Adam --optimizer_lr=1e-4 \
+--training_dataset MpiSintelFinal --training_dataset_root ./MPI-Sintel/training/final  \
+--validation_dataset MpiSintelClean --validation_dataset_root ./MPI-Sintel/training/final
+
+
+
+
+python main.py --total_epochs 1000 --batch_size 16 --model FlowNet2 --loss=L1Loss --optimizer=Adam --optimizer_lr=1e-4 \
+--training_dataset MpiSintelFinal --training_dataset_root ./MPI-Sintel/training  \
+--validation_dataset MpiSintelClean --validation_dataset_root ./MPI-Sintel/training
+
+
