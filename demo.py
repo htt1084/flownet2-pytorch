@@ -12,8 +12,8 @@ import matplotlib.pyplot as plt
 
 if __name__ == '__main__':
   # Prepare img pair
-  im1 = imread('data/FlyingChairs_examples/0000000-img0.ppm')
-  im2 = imread('data/FlyingChairs_examples/0000000-img1.ppm')
+  im1 = imread('/home/tung/data/FlyingChairs_examples/0000000-img0.ppm')
+  im2 = imread('/home/tung/data/FlyingChairs_examples/0000000-img1.ppm')
   # B x 3(RGB) x 2(pair) x H x W
   ims = np.array([[im1, im2]]).transpose((0, 4, 1, 2, 3)).astype(np.float32)
   ims = torch.from_numpy(ims)
@@ -22,7 +22,7 @@ if __name__ == '__main__':
 
   # Build model
   flownet2 = FlowNet2()
-  path = 'FlowNet2_checkpoint.pth.tar'
+  path = '/home/tung/data/flownet2-pytorch/FlowNet2_checkpoint.pth.tar'
   pretrained_dict = torch.load(path)['state_dict']
   model_dict = flownet2.state_dict()
   pretrained_dict = {k: v for k, v in pretrained_dict.items() if k in model_dict}
