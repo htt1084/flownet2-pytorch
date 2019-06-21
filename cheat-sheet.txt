@@ -15,7 +15,15 @@ python main.py --batch_size 8 --model FlowNet2 --loss=L1Loss --optimizer=Adam --
 
 
 python main.py --total_epochs 1000 --batch_size 8 --model FlowNet2 --loss=L1Loss --optimizer=Adam --optimizer_lr=1e-4 \
---training_dataset MpiSintelFinal --training_dataset_root ~/data/flownet2-pytorch/MPI-Sintel-training/training/final  \
---validation_dataset MpiSintelClean --validation_dataset_root ~/data/flownet2-pytorch/MPI-Sintel-training/training/clean
+--training_dataset MpiSintelFinal --training_dataset_root /mnt/data/flownet2-pytorch/MPI-Sintel-training/training/final  \
+--validation_dataset MpiSintelClean --validation_dataset_root /mnt/data/flownet2-pytorch/MPI-Sintel-training/training/clean
 
 
+
+# work on Tung's Ubuntu desktop!!!
+python3 main.py --batch_size 8 --model FlowNet2 --loss=L1Loss --optimizer=Adam --optimizer_lr=1e-4 \
+--training_dataset MpiSintelFinal --training_dataset_root /mnt/data/flownet2-pytorch/MPI-Sintel/training  \
+--validation_dataset MpiSintelClean --validation_dataset_root /mnt/data/flownet2-pytorch/MPI-Sintel/training
+
+
+python main.py --inference --model FlowNet2 --save_flow --inference_dataset MpiSintelClean --inference_dataset_root /mnt/data/flownet2-pytorch/MPI-Sintel/training/clean --resume /mnt/data/flownet2-pytorch/FlowNet2_checkpoint.pth.tar
