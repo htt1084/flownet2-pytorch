@@ -2,16 +2,17 @@
 cp models.py FlowNet2.py
 
 # cp demo.py from https://github.com/vt-vl-lab/pytorch_flownet2/blob/master/demo.py
-# demo.py works!
+# demo.py works! (need flowlib.py)
+# cp flowlib.py from https://github.com/vt-vl-lab/pytorch_flownet2/blob/master/FlowNet2_src/flowlib.py
 # flow_pair.py works!
 
-# cp flow_to_image.py/flowlib.py from https://github.com/vt-vl-lab/pytorch_flownet2/blob/master/FlowNet2_src/flowlib.py
+
 
 # To run demo.py (import png)
  pip install pypng
 
 # 06-12-2019
-Can train FlowNet2, but FlowNet2S has issue, saved to slack as FlowNet2S_training_issue.png
+Can train FlowNet2, but FlowNet2S has issue, saved to Tung's slack as FlowNet2S_training_issue.png
 Issue: 
 TypeError: rsub() received an invalid combination of arguments - got (Tensor, tuple), but expected one of:
 * (Tensor input, Tensor other, Number alpha)
@@ -27,3 +28,16 @@ Training Epoch 200 L1: 10.412, EPE: 16.045
 - batch size 8 => 10/16 GB GPU memory, GPU-Util ~ 90%
 - batch size 16 => 16/16 GB GPU memory, GPU-Util 97% (stable training still)
 
+# 06-22-2019
+# Train on MPI-SintelFinal and test on MPI-SintelClean
+Training Epoch 4241(best) L1: 3.5xx, EPE: 5.7xx ???
+
+
+
+#06-23-2019
+# flow_pair.py works for pretrained FlowNet2_checkpoint.pth.tar, but NOT on self-trained one. 
+# demo.py works for both, but somehow flow quality is bad for both. 
+
+
+# Results on MPI-SintelClean pretrained FlowNet2
+L1: 1.417, EPE: 2.220

@@ -2,8 +2,12 @@ import torch
 import numpy as np
 import argparse
 
-from FlowNet2 import FlowNet2 #the path is depended on where you create this module
+#from FlowNet2 import FlowNet2 #the path is depended on where you create this module
+from models import FlowNet2
 from utils.frame_utils import read_gen #the path is depended on where you create this module 
+
+import cvbase as cvb 
+
 
 if __name__ == '__main__':
     #obtain the necessary args for construct the flownet framework
@@ -15,12 +19,16 @@ if __name__ == '__main__':
     #initial a Net
     net = FlowNet2(args).cuda()
     #load the state_dict
+    #PATH = "/mnt/data/flownet2-pytorch/FlowNet2_checkpoint.pth.tar"
+    #PATH = "work/FlowNet2_checkpoint.pth.tar"
     dict = torch.load("/mnt/data/flownet2-pytorch/FlowNet2_checkpoint.pth.tar")
+    #dict = torch.load("work/FlowNet2_checkpoint.pth.tar")
     net.load_state_dict(dict["state_dict"])
     
+
     #load the image pair, you can find this operation in dataset.py
-    pim1 = read_gen("./data/FlyingChairs_examples/0000007-img0.ppm")
-    pim2 = read_gen("./data/FlyingChairs_examples/0000007-img1.ppm")
+    pim1 = read_gen("/mnt/data/FlyingChairs_examples/0000007-img0.ppm")
+    pim2 = read_gen("/mnt/data/FlyingChairs_examples/0000007-img1.ppm")
     images = [pim1, pim2]
     images = np.array(images).transpose(3, 0, 1, 2)
     im = torch.from_numpy(images.astype(np.float32)).unsqueeze(0).cuda()
@@ -40,4 +48,11 @@ if __name__ == '__main__':
         f.close()
 
     data = result.data.cpu().numpy().transpose(1, 2, 0)
-    writeFlow("./data/FlyingChairs_examples/tung/0000007.flo",data)
+    flow_file = "/mnt/data/FlyingChairs_examples/0000007_selftrained.flo"
+    writeFlow(flow_file,data)
+
+    # to visualize a flow file
+    cvb.show_flow(flow_file)
+
+
+
