@@ -18,7 +18,7 @@ if not os.path.exists(combined_folder):
 
 #file_name = "000500"
 
-'''
+
 for file_name in os.listdir(pretrained_folder):
 	pretrained_flow_file = pretrained_folder + file_name
 	selftrained_flow_file = selftrained_folder + file_name
@@ -40,7 +40,7 @@ for file_name in os.listdir(pretrained_folder):
 
 	combined = np.concatenate((pretrained_im, selftrained_im), axis=1)
 	cv2.imwrite(combined_folder + file_name.split('.')[0] + '_predicted.png', combined)
-'''
+
 
 
 
