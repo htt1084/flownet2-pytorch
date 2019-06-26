@@ -7,18 +7,27 @@ python main.py --inference --model FlowNet2 --save_flow --save ./result --infere
 python main.py --inference --model FlowNet2 --save_flow --save ./result/ --inference_dataset clean/tiger --inference_dataset_root ./MPI-Sintel/test --resume ./FlowNet2_checkpoint.pth.tar
 
 # Training
-python main.py --batch_size 8 --model FlowNet2 --loss=L1Loss --optimizer=Adam --optimizer_lr=1e-4 \
---training_dataset MpiSintelFinal --training_dataset_root /mnt/flownet2-pytorch-backup/MPI-Sintel/training/final  \
---validation_dataset MpiSintelClean --validation_dataset_root mnt/flownet2-pytorch/MPI-Sintel/training/final
+python main.py --batch_size 8 --model FlowNet2SD --loss=L1Loss --optimizer=Adam --optimizer_lr=1e-4 \
+--training_dataset MpiSintelFinal --training_dataset_root /mnt/flownet2-pytorch-backup/MPI-Sintel/training  \
+--validation_dataset MpiSintelClean --validation_dataset_root /mnt/flownet2-pytorch-backup/MPI-Sintel/training
 
+python main.py --batch_size 8 --model FlowNet2CSS --loss=L1Loss --optimizer=Adam --optimizer_lr=1e-4 \
+--training_dataset MpiSintelFinal --training_dataset_root /mnt/flownet2-pytorch-backup/MPI-Sintel/training  \
+--validation_dataset MpiSintelClean --validation_dataset_root /mnt/flownet2-pytorch-backup/MPI-Sintel/training
 
+python main.py --batch_size 8 --model FlowNet2SD --optimizer=Adam --optimizer_lr=1e-4 \
+--loss=MultiScale --loss_norm=L1 --loss_numScales=5 --loss_startScale=4 --optimizer_lr=1e-4 --crop_size 256 256 \
+--training_dataset MpiSintelFinal --training_dataset_root /mnt/flownet2-pytorch-backup/MPI-Sintel/training  \
+--validation_dataset MpiSintelClean --validation_dataset_root /mnt/flownet2-pytorch-backup/MPI-Sintel/training
 
 
 python main.py --total_epochs 1000 --batch_size 8 --model FlowNet2 --loss=L1Loss --optimizer=Adam --optimizer_lr=1e-4 \
 --training_dataset MpiSintelFinal --training_dataset_root /mnt/data/flownet2-pytorch/MPI-Sintel-training/training/final  \
 --validation_dataset MpiSintelClean --validation_dataset_root /mnt/data/flownet2-pytorch/MPI-Sintel-training/training/clean
 
-
+python main.py --batch_size 8 --model FlowNet2CSS --loss=L1Loss --optimizer=Adam --optimizer_lr=1e-4 \
+--training_dataset MpiSintelFinal --training_dataset_root /mnt/flownet2-pytorch-backup/MPI-Sintel/training  \
+--validation_dataset MpiSintelClean --validation_dataset_root /mnt/flownet2-pytorch-backup/MPI-Sintel/training
 
 # TRAINING work on Tung's Ubuntu desktop!!! (train on MPISintel from scratch)
 python3 main.py --batch_size 8 --model FlowNet2 --loss=L1Loss --optimizer=Adam --optimizer_lr=1e-4 \

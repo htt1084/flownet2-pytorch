@@ -242,7 +242,7 @@ class FlowNet2C(FlowNetC.FlowNetC):
             return self.upsample1(flow2*self.div_flow)
 
 class FlowNet2S(FlowNetS.FlowNetS):
-    def __init__(self, args, batchNorm=False, div_flow=20):
+    def __init__(self, args, batchNorm=True, div_flow=20):
         super(FlowNet2S,self).__init__(args, input_channels = 6, batchNorm=batchNorm)
         self.rgb_max = args.rgb_max
         self.div_flow = div_flow
@@ -288,7 +288,7 @@ class FlowNet2S(FlowNetS.FlowNetS):
             return self.upsample1(flow2*self.div_flow)
 
 class FlowNet2SD(FlowNetSD.FlowNetSD):
-    def __init__(self, args, batchNorm=False, div_flow=20):
+    def __init__(self, args, batchNorm=True, div_flow=20):
         super(FlowNet2SD,self).__init__(args, batchNorm=batchNorm)
         self.rgb_max = args.rgb_max
         self.div_flow = div_flow
@@ -341,7 +341,7 @@ class FlowNet2SD(FlowNetSD.FlowNetSD):
 
 class FlowNet2CS(nn.Module):
 
-    def __init__(self, args, batchNorm=False, div_flow = 20.):
+    def __init__(self, args, batchNorm=True, div_flow = 20.):
         super(FlowNet2CS,self).__init__()
         self.batchNorm = batchNorm
         self.div_flow = div_flow
@@ -406,7 +406,7 @@ class FlowNet2CS(nn.Module):
 
 class FlowNet2CSS(nn.Module):
 
-    def __init__(self, args, batchNorm=False, div_flow = 20.):
+    def __init__(self, args, batchNorm=True, div_flow = 20.):
         super(FlowNet2CSS,self).__init__()
         self.batchNorm = batchNorm
         self.div_flow = div_flow
