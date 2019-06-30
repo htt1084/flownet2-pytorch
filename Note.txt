@@ -60,3 +60,23 @@ Training Epoch 4241(best) L1: 3.5xx, EPE: 5.7xx ???
 
 # Results on MPI-SintelClean pretrained FlowNet2
 L1: 1.417, EPE: 2.220
+
+# 06-25-2019
+- Train FlowNet2CSS on FlyingChairs
+python main.py --batch_size 8 --model FlowNet2CSS --loss=L1Loss --optimizer=Adam --optimizer_lr=1e-4 \
+--training_dataset FlyingChairs --training_dataset_root /mnt/flownet2-pytorch/data/FlyingChairs_release/data  \
+--validation_dataset MpiSintelClean --validation_dataset_root /mnt/flownet2-pytorch/MPI-Sintel/training
+
+- To test: 
+
+python main.py --inference --model FlowNet2CSS --save_flow --inference_dataset MpiSintelClean \ 
+--inference_dataset_root /mnt/flownet2-pytorch/MPI-Sintel/training \ 
+--resume work/FlowNet2CSS_model_best.pth.tar
+
+=> 
+
+- Accuracy is low, since FlyingChairs is a large dataset => need to train more. 
+- Best at 121, L1: 4.8x, EPE: 7.6x
+
+# 06-26-2019
+- Keep training FlowNet2CSS on FlyingChairs

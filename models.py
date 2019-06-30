@@ -18,7 +18,7 @@ from networks.submodules import *
 
 class FlowNet2(nn.Module):
 
-    def __init__(self, args, batchNorm=True, div_flow = 20.):
+    def __init__(self, args, batchNorm=False, div_flow = 20.):
         super(FlowNet2,self).__init__()
         self.batchNorm = batchNorm
         self.div_flow = div_flow
@@ -292,7 +292,10 @@ class FlowNet2SD(FlowNetSD.FlowNetSD):
         super(FlowNet2SD,self).__init__(args, batchNorm=batchNorm)
         self.rgb_max = args.rgb_max
         self.div_flow = div_flow
-
+        
+        # added
+        self.args = args 
+       
     def forward(self, inputs):
         rgb_mean = inputs.contiguous().view(inputs.size()[:2]+(-1,)).mean(dim=-1).view(inputs.size()[:2] + (1,1,1,))
         x = (inputs - rgb_mean) / self.rgb_max

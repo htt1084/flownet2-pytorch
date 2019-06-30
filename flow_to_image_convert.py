@@ -11,14 +11,14 @@ import os
 
 
 pretrained_folder = "work/inference/run.epoch-0-flow-field_pretrained/"
-selftrained_folder = "work/inference/run.epoch-0-flow-field_selftrained/"
+selftrained_folder = "work/inference/run.epoch-0-flow-field/"
+
 combined_folder = "work/inference/combined/"
 if not os.path.exists(combined_folder):
 	os.makedirs(combined_folder)
 
 #file_name = "000500"
-
-
+'''
 for file_name in os.listdir(pretrained_folder):
 	pretrained_flow_file = pretrained_folder + file_name
 	selftrained_flow_file = selftrained_folder + file_name
@@ -40,9 +40,7 @@ for file_name in os.listdir(pretrained_folder):
 
 	combined = np.concatenate((pretrained_im, selftrained_im), axis=1)
 	cv2.imwrite(combined_folder + file_name.split('.')[0] + '_predicted.png', combined)
-
-
-
+'''
 
 img_list = os.listdir(combined_folder)
 img_list.sort()

@@ -168,7 +168,10 @@ if __name__ == '__main__':
                 
             def forward(self, data, target, inference=False ):
                 output = self.model(data)
-
+                #print('type(output) in main is: ')
+                #print(type(output))
+                #print('output in main is: ')
+                #print(output)
                 loss_values = self.loss(output, target)
 
                 if not inference :
@@ -251,6 +254,7 @@ if __name__ == '__main__':
             args.validation_n_batches = np.inf if args.validation_n_batches < 0 else args.validation_n_batches
             progress = tqdm(tools.IteratorTimer(data_loader), ncols=100, total=np.minimum(len(data_loader), args.validation_n_batches), leave=True, position=offset, desc=title)
         else:
+            #model = model.cuda()
             model.train()
             title = 'Training Epoch {}'.format(epoch)
             args.train_n_batches = np.inf if args.train_n_batches < 0 else args.train_n_batches
@@ -262,12 +266,16 @@ if __name__ == '__main__':
             data, target = [Variable(d) for d in data], [Variable(t) for t in target]
             if args.cuda and args.number_gpus == 1:
                 data, target = [d.cuda(async=True) for d in data], [t.cuda(async=True) for t in target]
-
             optimizer.zero_grad() if not is_validate else None
+            #print('target[0] is: ')
+            #print(target[0])
+            #print('type(target[0]) is: ')
+            #print(type(target[0]))
             losses = model(data[0], target[0])
             #losses = model(data, target)
             losses = [torch.mean(loss_value) for loss_value in losses] 
             loss_val = losses[0] # Collect first loss for weight update
+            #loss_val = loss_val.cuda()
             total_loss += loss_val.item()
             loss_values = [v.item() for v in losses]
             #total_loss += loss_val.data[0].item()

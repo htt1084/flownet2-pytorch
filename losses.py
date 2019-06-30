@@ -15,6 +15,15 @@ class L1(nn.Module):
     def __init__(self):
         super(L1, self).__init__()
     def forward(self, output, target):
+        #print('type(output) is: ')
+        #print(type(output))
+        #print('output.size() is: ')
+        #print(output.size())
+        #print('type(target) is: ')
+        #print(type(target))
+        #print('target.size() is: ')
+        #print(target.size())
+      
         lossvalue = torch.abs(output - target).mean()
         return lossvalue
 
@@ -67,7 +76,7 @@ class MultiScale(nn.Module):
             self.loss = L2()
 
         self.multiScales = [nn.AvgPool2d(self.startScale * (2**scale), self.startScale * (2**scale)) for scale in range(self.numScales)]
-        self.loss_labels = ['MultiScale-'+self.l_type, 'EPE'],
+        self.loss_labels = ['MultiScale-'+self.l_type, 'EPE']
 
     def forward(self, output, target):
         lossvalue = 0
@@ -77,11 +86,15 @@ class MultiScale(nn.Module):
             target = self.div_flow * target
             for i, output_ in enumerate(output):
                 target_ = self.multiScales[i](target)
-                epevalue += self.loss_weights[i]*EPE(output_, target_)
-                lossvalue += self.loss_weights[i]*self.loss(output_, target_)
+                if i == 0:
+                    epevalue = EPE(output_, target_) * self.loss_weights[i]
+                    lossvalue = self.loss(output_, target_) * self.loss_weights[i]
+                else: 
+                    epevalue += self.loss_weights[i]*EPE(output_, target_)
+                    lossvalue += self.loss_weights[i]*self.loss(output_, target_)
             return [lossvalue, epevalue]
         else:
-            epevalue += EPE(output, target)
-            lossvalue += self.loss(output, target)
+            epevalue = EPE(output, target)
+            lossvalue = self.loss(output, target)
             return  [lossvalue, epevalue]
 
